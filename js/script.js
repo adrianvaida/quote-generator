@@ -6,12 +6,12 @@ const newQuote = document.getElementById('new-quote');
 const loader = document.querySelector('#loader');
 
 
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-function hideLoading() {
+function removeLoadingSpiner() {
     if(!loader.hidden) {
         quoteContainer.hidden = false;
         loader.hidden = true;
@@ -20,7 +20,7 @@ function hideLoading() {
 //  Get Quote From API
 
 async function getQuote() {
-    loading();
+    showLoadingSpinner();
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
     try {
@@ -41,7 +41,7 @@ async function getQuote() {
         quoteText.innerText = data.quoteText;
 
         // Stop loader
-        hideLoading();
+        removeLoadingSpiner();
     } catch (error) {
         getQuote();
     }
